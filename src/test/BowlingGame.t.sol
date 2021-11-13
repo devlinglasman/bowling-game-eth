@@ -6,6 +6,7 @@ import "./utils/BowlingGameTest.sol";
 contract TestBowlingGame is BowlingGameTest {
 
     function test_returns_number_between_1_and_10_inclusive() public {
-        assertEq(bowlingGame.roll(), 1);
+        uint256 roll = bowlingGame.roll();
+        assertTrue(11 > roll && roll > 0);
     }
 }
