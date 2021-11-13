@@ -14,4 +14,10 @@ contract TestBowlingGame is BowlingGameTest {
         bowlingGame.roll(10);
         assertTrue(bowlingGame.isFrameFinished());
     }
+
+    function test_frame_finished_after_second_roll() public {
+        bowlingGame.roll(4);
+        bowlingGame.roll(1);
+        assertTrue(bowlingGame.isFrameFinished());
+    }
 }

@@ -6,14 +6,10 @@ contract BowlingGame {
     uint256 secondRoll;
 
     function roll(uint256 pinsKnockedDown) public {
-        firstRoll = pinsKnockedDown;
+        firstRoll != 0 ? secondRoll = pinsKnockedDown : firstRoll = pinsKnockedDown;
     }
 
     function isFrameFinished() public view returns (bool) {
-        if (firstRoll == 10) {
-            return true;
-        } else {
-            return false;
-        }
+        return firstRoll == 10 || secondRoll != 0 ? true : false;
     }
 }
