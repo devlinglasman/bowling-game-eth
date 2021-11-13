@@ -5,8 +5,13 @@ import "./utils/BowlingGameTest.sol";
 
 contract TestBowlingGame is BowlingGameTest {
 
-    function test_returns_number_between_1_and_10_inclusive() public {
-        uint256 roll = bowlingGame.roll();
-        assertTrue(11 > roll && roll > 0);
+    function test_frame_not_finished_if_first_roll_less_than_ten() public {
+        bowlingGame.roll(9);
+        assertTrue(!bowlingGame.isFrameFinished());
+    }
+
+    function test_frame_finished_if_first_roll_ten() public {
+        bowlingGame.roll(10);
+        assertTrue(bowlingGame.isFrameFinished());
     }
 }
