@@ -76,13 +76,14 @@ contract TestBowlingGame is BowlingGameTest {
                                     bowlingGame.roll(3);
                                     bowlingGame.roll(4); // F18 - P2 - 7 - 65
         bowlingGame.roll(2);
-        bowlingGame.roll(5); // F19 - P1 - 7 - 61
-                                    bowlingGame.roll(10); // F20 - P2 - Strike - 75
-                                    bowlingGame.roll(10); // F20 - P2 - Strike - 85
-                                    bowlingGame.roll(10); // F20 - P2 - Strike - 95
+        bowlingGame.roll(8); // F19 Final - P1 - Spare: 10 - 64
+        bowlingGame.roll(6); // F19 Final - P1 - 6 - 70
+                                    bowlingGame.roll(10); // F20 Final - P2 - Strike - 75
+                                    bowlingGame.roll(10); // F20 Final - P2 - Strike - 85
+                                    bowlingGame.roll(10); // F20 Final - P2 - Strike - 95
 
         // SCORES
-        assertEq(bowlingGame.gameScoreForFirstPlayer(), 61);
+        assertEq(bowlingGame.gameScoreForFirstPlayer(), 70);
         assertEq(bowlingGame.gameScoreForSecondPlayer(), 95);
     }
 }

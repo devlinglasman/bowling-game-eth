@@ -36,19 +36,11 @@ contract BowlingGame {
     function roll(uint256 pinsKnockedDown) public {
         if (allFrames[currentFrameNumber].notTakenFirstRoll()) {
             playFirstRoll(pinsKnockedDown);
-            if (!isFinalRound() && allFrames[currentFrameNumber].gotStrike()) {
-                currentFrameNumber++;
-            }
         } else if (allFrames[currentFrameNumber].notTakenSecondRoll()) {
             playSecondRoll(pinsKnockedDown);
-            if (!isFinalRound()) {
-                currentFrameNumber++;
-            } else if (isFinalRound() && !allFrames[currentFrameNumber].gotSpareOrStrike()) {
-                currentFrameNumber++;
-            }
         } else {
             allFrames[currentFrameNumber].setThirdRoll(pinsKnockedDown);
-            currentFrameNumber++;
+            proceedToNextFrame();
         }
     }
 
@@ -103,6 +95,9 @@ contract BowlingGame {
         if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotSpareOrStrike()) {
             allFrames[previousFrameNumberForSamePlayer()].setThirdRoll(pinsKnockedDown);
         }
+        if (notFinalRoundAndGotStrike()) {
+            proceedToNextFrame();
+        }
     }
 
     function playSecondRoll(uint256 pinsKnockedDown) private {
@@ -110,5 +105,20 @@ contract BowlingGame {
         if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotStrike()) {
             allFrames[previousFrameNumberForSamePlayer()].setFourthRoll(pinsKnockedDown);
         }
+        if (!isFinalRound() || isFinalRoundAndGotStrikeOrSpare()) {
+            proceedToNextFrame();
+        }
+    }
+
+    function proceedToNextFrame() private {
+        currentFrameNumber++;
+    }
+
+    function notFinalRoundAndGotStrike() private view returns (bool) {
+        return !isFinalRound() && allFrames[currentFrameNumber].gotStrike();
+    }
+
+    function isFinalRoundAndGotStrikeOrSpare() private view returns (bool) {
+        return isFinalRound() && !allFrames[currentFrameNumber].gotSpareOrStrike();
     }
 }
