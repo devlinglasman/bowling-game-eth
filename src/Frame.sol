@@ -32,6 +32,10 @@ contract Frame {
         return firstRoll == 0;
     }
 
+    function notTakenSecondRoll() public view returns (bool) {
+        return secondRoll == 0;
+    }
+
     function isFrameFinished() public view returns (bool) {
         require(firstRoll != 0);
         return firstRoll == 10 || secondRoll != 0 ? true : false;

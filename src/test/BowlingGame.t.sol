@@ -42,45 +42,47 @@ contract TestBowlingGame is BowlingGameTest {
 
         bowlingGame.roll(3);
         bowlingGame.roll(3); // F1 - P1 - 6 - 6
-        bowlingGame.roll(3);
-        bowlingGame.roll(7); // F2 - P2 - Spare: 13 - 13
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(7); // F2 - P2 - Spare: 13 - 13
         bowlingGame.roll(2);
         bowlingGame.roll(2); // F3 - P1 - 4 - 10
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(3); // F4 - P2 - 6 - 19
+        bowlingGame.roll(10); // F5 - P1 - Strike: 15 - 25
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(4); // F6 - P2 - 7 - 26
+        bowlingGame.roll(1);
+        bowlingGame.roll(4); // F7 - P1 - 5 - 30
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(3); // F8 - P2 - 6 - 32
         bowlingGame.roll(3);
-        bowlingGame.roll(3); // F4 - P2 - 6 - 19
-        bowlingGame.roll(10); // F5 - P1 - Strike: 20 - 30
-        bowlingGame.roll(3);
-        bowlingGame.roll(4); // F6 - P2 - 7 - 26
-        bowlingGame.roll(10); // F7 - P1 - Strike: 16 - 46
-        bowlingGame.roll(3);
-        bowlingGame.roll(3); // F8 - P2 - 6 - 32
-        bowlingGame.roll(3);
-        bowlingGame.roll(3); // F9 - P1 - 6 - 52
-        bowlingGame.roll(3);
-        bowlingGame.roll(4); // F10 - P2 - 7 - 39
+        bowlingGame.roll(3); // F9 - P1 - 6 - 36
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(4); // F10 - P2 - 7 - 39
         bowlingGame.roll(2);
-        bowlingGame.roll(2); // F11 - P1 - 4 - 56
+        bowlingGame.roll(2); // F11 - P1 - 4 - 40
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(3); // F12 - P2 - 6 - 45
         bowlingGame.roll(3);
-        bowlingGame.roll(3); // F12 - P2 - 6 - 45
-        bowlingGame.roll(3);
-        bowlingGame.roll(3); // F13 - P1 - 6 - 62
-        bowlingGame.roll(3);
-        bowlingGame.roll(4); // F14 - P2 - 7 - 52
+        bowlingGame.roll(3); // F13 - P1 - 6 - 46
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(4); // F14 - P2 - 7 - 52
         bowlingGame.roll(2);
-        bowlingGame.roll(2); // F15 - P1 - 4 - 66
+        bowlingGame.roll(2); // F15 - P1 - 4 - 50
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(3); // F16 - P2 - 6 - 58
         bowlingGame.roll(3);
-        bowlingGame.roll(3); // F16 - P2 - 6 - 58
-        bowlingGame.roll(3);
-        bowlingGame.roll(1); // F17 - P1 - 6 - 70
-        bowlingGame.roll(3);
-        bowlingGame.roll(4); // F18 - P2 - 7 - 65
+        bowlingGame.roll(1); // F17 - P1 - 4 - 54
+                                    bowlingGame.roll(3);
+                                    bowlingGame.roll(4); // F18 - P2 - 7 - 65
         bowlingGame.roll(2);
-        bowlingGame.roll(5); // F19 - P1 - 5 - 77
-        bowlingGame.roll(10); // F20 - P2 - Strike - 75
-        bowlingGame.roll(10); // F20 - P2 - Strike - 85
-        bowlingGame.roll(10); // F20 - P2 - Strike - 95
+        bowlingGame.roll(5); // F19 - P1 - 7 - 61
+                                    bowlingGame.roll(10); // F20 - P2 - Strike - 75
+                                    bowlingGame.roll(10); // F20 - P2 - Strike - 85
+                                    bowlingGame.roll(10); // F20 - P2 - Strike - 95
 
-        assertEq(bowlingGame.gameScoreForFirstPlayer(), 77);
+        // SCORES
+        assertEq(bowlingGame.gameScoreForFirstPlayer(), 61);
         assertEq(bowlingGame.gameScoreForSecondPlayer(), 95);
     }
 }
