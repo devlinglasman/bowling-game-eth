@@ -32,10 +32,6 @@ contract TestBowlingGame is BowlingGameTest {
         assertEq(frameScore, 5);
     }
 
-    function test_frame_number() public {
-        assertEq(bowlingGame.getFrameNumber(), 1);
-    }
-
 //    function test_score_frame_when_previous_spare() public {
 //        bowlingGame.roll(5);
 //        bowlingGame.roll(5);

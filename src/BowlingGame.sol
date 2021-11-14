@@ -7,7 +7,8 @@ contract BowlingGame {
     // The game can interrogate the previous frame about whether it is waiting due
     // to a spare or strike, then give the next rolls to it.
 
-    Frame currentFrame = new Frame(1);
+    Frame[2] allFrames = [new Frame(0), new Frame(1)];
+    Frame currentFrame = allFrames[0];
 
     function roll(uint256 pinsKnockedDown) public {
         if (currentFrame.firstRoll() == 0) {
@@ -28,6 +29,6 @@ contract BowlingGame {
     }
 
     function scoreForFrame(uint256 frameNumber) public view returns (uint) {
-        return currentFrame.scoreForFrame();
+        return allFrames[frameNumber].scoreForFrame();
     }
 }
