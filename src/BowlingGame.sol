@@ -37,22 +37,16 @@ contract BowlingGame {
     }
 
     function roll(uint256 pinsKnockedDown) public {
-        if (allFrames[currentFrameNumber].firstRoll() == 0) {
-            // if the first roll of current frame does not exist,
-            // set it. And if frame-2 was spare or strike, set third roll.
+        if (allFrames[currentFrameNumber].notTakenFirstRoll()) {
             allFrames[currentFrameNumber].setFirstRoll(pinsKnockedDown);
-            if (currentFrameNumber > 1 && allFrames[currentFrameNumber - 2].gotSpareOrStrike()) {
-                allFrames[currentFrameNumber - 2].setThirdRoll(pinsKnockedDown);
-            }
-        } else if (allFrames[currentFrameNumber].secondRoll() == 0) {
-            // if the second roll of current frame does not exist,
-            // set it. And if frame-2 was strike, set fourth roll.
-            allFrames[currentFrameNumber].setSecondRoll(pinsKnockedDown);
-            if (currentFrameNumber > 1 && allFrames[currentFrameNumber - 2].gotStrike()) {
-                allFrames[currentFrameNumber - 2].setFourthRoll(pinsKnockedDown);
+            if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotSpareOrStrike()) {
+                allFrames[previousFrameNumberForSamePlayer()].setThirdRoll(pinsKnockedDown);
             }
         } else {
-            allFrames[currentFrameNumber].setThirdRoll(pinsKnockedDown);
+            allFrames[currentFrameNumber].setSecondRoll(pinsKnockedDown);
+            if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotStrike()) {
+                allFrames[previousFrameNumberForSamePlayer()].setFourthRoll(pinsKnockedDown);
+            }
         }
 
         if (isFrameFinished(currentFrameNumber)) {
@@ -66,5 +60,13 @@ contract BowlingGame {
 
     function scoreForFrame(uint256 frameNumber) public view returns (uint) {
         return allFrames[frameNumber].scoreForFrame();
+    }
+
+    function previousFrameNumberForSamePlayer() private view returns (uint256) {
+        return currentFrameNumber - 2;
+    }
+
+    function isSecondRoundOrHigher() private view returns (bool) {
+        return currentFrameNumber > 1;
     }
 }
