@@ -105,7 +105,7 @@ contract BowlingGame {
         if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotStrike()) {
             allFrames[previousFrameNumberForSamePlayer()].setFourthRoll(pinsKnockedDown);
         }
-        if (!isFinalRound() || isFinalRoundAndGotStrikeOrSpare()) {
+        if (!isFinalRound() || isFinalRoundAndNoStrikeOrSpare()) {
             proceedToNextFrame();
         }
     }
@@ -118,7 +118,7 @@ contract BowlingGame {
         return !isFinalRound() && allFrames[currentFrameNumber].gotStrike();
     }
 
-    function isFinalRoundAndGotStrikeOrSpare() private view returns (bool) {
+    function isFinalRoundAndNoStrikeOrSpare() private view returns (bool) {
         return isFinalRound() && !allFrames[currentFrameNumber].gotSpareOrStrike();
     }
 }
