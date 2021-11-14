@@ -25,18 +25,22 @@ contract TestBowlingGame is BowlingGameTest {
         assertTrue(bowlingGame.isFrameFinished());
     }
 
-    function test_score_frame_when_no_ten() public {
+    function test_score_frames_when_no_tens() public {
         bowlingGame.roll(4);
         bowlingGame.roll(1);
-        uint256 frameScore = bowlingGame.scoreForFrame();
+        uint256 frameScore = bowlingGame.scoreForFrame(0);
         assertEq(frameScore, 5);
     }
 
-    function test_score_frame_when_previous_spare() public {
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        bowlingGame.roll(5);
-        uint256 frameScore = bowlingGame.scoreForFrame();
-        assertEq(frameScore, 15);
+    function test_frame_number() public {
+        assertEq(bowlingGame.getFrameNumber(), 1);
     }
+
+//    function test_score_frame_when_previous_spare() public {
+//        bowlingGame.roll(5);
+//        bowlingGame.roll(5);
+//        bowlingGame.roll(5);
+//        uint256 frameScore = bowlingGame.scoreForFrame();
+//        assertEq(frameScore, 15);
+//    }
 }

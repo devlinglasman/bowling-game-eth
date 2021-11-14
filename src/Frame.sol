@@ -12,6 +12,10 @@ contract Frame {
     uint256 public thirdRoll;
     uint256 public fourthRoll;
 
+    constructor(uint _frameNumber) {
+        frameNumber = _frameNumber;
+    }
+
     function setFirstRoll(uint value) public {
         firstRoll = value;
     }
