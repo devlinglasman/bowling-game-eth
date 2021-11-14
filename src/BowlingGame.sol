@@ -10,6 +10,7 @@ contract BowlingGame {
     }
 
     function isFrameFinished() public view returns (bool) {
+        require(firstRoll != 0);
         return firstRoll == 10 || secondRoll != 0 ? true : false;
     }
 }

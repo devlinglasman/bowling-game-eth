@@ -5,6 +5,10 @@ import "./utils/BowlingGameTest.sol";
 
 contract TestBowlingGame is BowlingGameTest {
 
+    function testFail_not_rolled_yet() view public {
+        bowlingGame.isFrameFinished();
+    }
+
     function test_frame_not_finished_if_first_roll_less_than_ten() public {
         bowlingGame.roll(9);
         assertTrue(!bowlingGame.isFrameFinished());
