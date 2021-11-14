@@ -1,14 +1,8 @@
-# <h1 align="center"> DappTools Template </h1>
-
-**Template repository for getting started quickly with DappTools**
-
-![Github Actions](https://github.com/gakonst/dapptools-template/workflows/Tests/badge.svg)
+[Bowling Game kata](https://kata-log.rocks/bowling-game-kata) in Solidity, generated initially from DAppTools template.
 
 ## Building and testing
 
 ```sh
-git clone https://github.com/gakonst/dapptools-template
-cd dapptools-template
 make # This installs the project's dependencies.
 make test
 ```
