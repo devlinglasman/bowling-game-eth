@@ -2,10 +2,6 @@
 pragma solidity ^0.8.0;
 
 contract Frame {
-    // The frame maintains its state - it will ultimately tell you its score including
-    // strikes and spares, calculated by rolls in the next frame. The game has to add
-    // values to it.
-
     uint256 public frameNumber;
     uint256 public firstRoll;
     uint256 public secondRoll;

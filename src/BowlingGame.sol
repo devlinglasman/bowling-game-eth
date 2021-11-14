@@ -4,9 +4,6 @@ pragma solidity ^0.8.0;
 import "./Frame.sol";
 
 contract BowlingGame {
-    // The game can interrogate the previous frame about whether it is waiting due
-    // to a spare or strike, then give the next rolls to it.
-
     Frame[20] allFrames;
     uint256 currentFrameNumber;
 
