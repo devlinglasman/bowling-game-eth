@@ -34,20 +34,45 @@ contract BowlingGame {
     }
 
     function roll(uint256 pinsKnockedDown) public {
-        if (allFrames[currentFrameNumber].notTakenFirstRoll()) {
+        if (isFinalRound()) {
+            // If it's the final round,
+            // set first roll.
+            // set second roll. If it's a strike or spare, play one more
+            // set third roll. Add these three together for final frame score.
             allFrames[currentFrameNumber].setFirstRoll(pinsKnockedDown);
-            if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotSpareOrStrike()) {
+            if (allFrames[previousFrameNumberForSamePlayer()].gotSpareOrStrike()) {
                 allFrames[previousFrameNumberForSamePlayer()].setThirdRoll(pinsKnockedDown);
             }
-        } else {
+
             allFrames[currentFrameNumber].setSecondRoll(pinsKnockedDown);
-            if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotStrike()) {
+            if (allFrames[previousFrameNumberForSamePlayer()].gotStrike()) {
                 allFrames[previousFrameNumberForSamePlayer()].setFourthRoll(pinsKnockedDown);
             }
-        }
 
-        if (isFrameFinished(currentFrameNumber)) {
-            currentFrameNumber++;
+            if (allFrames[currentFrameNumber].gotSpareOrStrike()) {
+                allFrames[currentFrameNumber].setThirdRoll(pinsKnockedDown);
+            }
+
+            if (currentFrameNumber == 18) {
+                currentFrameNumber++;
+            }
+            
+        } else {
+            if (allFrames[currentFrameNumber].notTakenFirstRoll()) {
+                allFrames[currentFrameNumber].setFirstRoll(pinsKnockedDown);
+                if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotSpareOrStrike()) {
+                    allFrames[previousFrameNumberForSamePlayer()].setThirdRoll(pinsKnockedDown);
+                }
+            } else {
+                allFrames[currentFrameNumber].setSecondRoll(pinsKnockedDown);
+                if (isSecondRoundOrHigher() && allFrames[previousFrameNumberForSamePlayer()].gotStrike()) {
+                    allFrames[previousFrameNumberForSamePlayer()].setFourthRoll(pinsKnockedDown);
+                }
+            }
+
+            if (isFrameFinished(currentFrameNumber)) {
+                currentFrameNumber++;
+            }
         }
     }
 
@@ -91,5 +116,9 @@ contract BowlingGame {
 
     function isSecondRoundOrHigher() private view returns (bool) {
         return currentFrameNumber > 1;
+    }
+
+    function isFinalRound() private view returns (bool) {
+        return currentFrameNumber > 17;
     }
 }

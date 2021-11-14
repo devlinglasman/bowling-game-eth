@@ -42,7 +42,7 @@ contract Frame {
     }
 
     function gotSpareOrStrike() public view returns (bool) {
-        return firstRoll + secondRoll == 10;
+        return firstRoll + secondRoll > 9;
     }
 
     function gotStrike() public view returns (bool) {
