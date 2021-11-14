@@ -48,6 +48,9 @@ contract BowlingGame {
             // if the second roll of current frame does not exist,
             // set it. And if frame-2 was strike, set fourth roll.
             allFrames[currentFrameNumber].setSecondRoll(pinsKnockedDown);
+            if (currentFrameNumber > 1 && allFrames[currentFrameNumber - 2].gotStrike()) {
+                allFrames[currentFrameNumber - 2].setFourthRoll(pinsKnockedDown);
+            }
         } else {
             allFrames[currentFrameNumber].setThirdRoll(pinsKnockedDown);
         }

@@ -28,16 +28,24 @@ contract Frame {
         thirdRoll = value;
     }
 
+    function setFourthRoll(uint value) public {
+        fourthRoll = value;
+    }
+
     function isFrameFinished() public view returns (bool) {
         require(firstRoll != 0);
         return firstRoll == 10 || secondRoll != 0 ? true : false;
     }
 
     function scoreForFrame() public view returns (uint) {
-        return firstRoll + secondRoll + thirdRoll;
+        return firstRoll + secondRoll + thirdRoll + fourthRoll;
     }
 
     function gotSpareOrStrike() public view returns (bool) {
         return firstRoll + secondRoll == 10;
+    }
+
+    function gotStrike() public view returns (bool) {
+        return firstRoll == 10;
     }
 }
