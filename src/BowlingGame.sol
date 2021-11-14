@@ -54,6 +54,32 @@ contract BowlingGame {
         }
     }
 
+    function gameScoreForFirstPlayer() public view returns (uint256) {
+        return allFrames[0].scoreForFrame() +
+        allFrames[2].scoreForFrame() +
+        allFrames[4].scoreForFrame() +
+        allFrames[6].scoreForFrame() +
+        allFrames[8].scoreForFrame() +
+        allFrames[10].scoreForFrame() +
+        allFrames[12].scoreForFrame() +
+        allFrames[14].scoreForFrame() +
+        allFrames[16].scoreForFrame() +
+        allFrames[18].scoreForFrame();
+    }
+
+    function gameScoreForSecondPlayer() public view returns (uint256) {
+        return allFrames[1].scoreForFrame() +
+        allFrames[3].scoreForFrame() +
+        allFrames[5].scoreForFrame() +
+        allFrames[7].scoreForFrame() +
+        allFrames[9].scoreForFrame() +
+        allFrames[11].scoreForFrame() +
+        allFrames[13].scoreForFrame() +
+        allFrames[15].scoreForFrame() +
+        allFrames[17].scoreForFrame() +
+        allFrames[19].scoreForFrame();
+    }
+
     function isFrameFinished(uint256 frameNumber) public view returns (bool) {
         return allFrames[frameNumber].isFrameFinished();
     }
