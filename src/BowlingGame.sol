@@ -15,11 +15,10 @@ contract BowlingGame {
     }
 
     function isFrameFinished() public view returns (bool) {
-        //        require(firstRoll != 0);
         return currentFrame.isFrameFinished();
     }
-    //
-    //    function scoreForFrame(uint256 frameNumber) public view returns (uint) {
-    //        return firstRoll + secondRoll;
-    //    }
+
+    function scoreForFrame() public view returns (uint) {
+        return currentFrame.scoreForFrame();
+    }
 }

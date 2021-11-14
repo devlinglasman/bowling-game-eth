@@ -23,7 +23,7 @@ contract Frame {
         return firstRoll == 10 || secondRoll != 0 ? true : false;
     }
 
-    function scoreForFrame(uint256 frameNumber) public view returns (uint) {
+    function scoreForFrame() public view returns (uint) {
         return firstRoll + secondRoll;
     }
 }
