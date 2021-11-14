@@ -36,20 +36,22 @@ contract TestBowlingGame is BowlingGameTest {
         uint256 frameScore1 = bowlingGame.scoreForFrame(1);
         assertEq(frameScore1, 7);
     }
-//
-//    function test_score_frames_when_first_is_spare() public {
-//        bowlingGame.roll(4);
-//        bowlingGame.roll(6);
-//        bowlingGame.roll(3);
-//        bowlingGame.roll(4);
-//        bowlingGame.roll(2);
-//        bowlingGame.roll(2);
-//
-//        uint256 frameScore0 = bowlingGame.scoreForFrame(0);
-//        assertEq(frameScore0, 5);
-//        uint256 frameScore1 = bowlingGame.scoreForFrame(1);
-//        assertEq(frameScore1, 7);
-//    }
+
+    function test_score_frames_when_first_is_spare() public {
+        bowlingGame.roll(4);
+        bowlingGame.roll(6);
+        bowlingGame.roll(3);
+        bowlingGame.roll(4);
+        bowlingGame.roll(2);
+        bowlingGame.roll(2);
+
+        uint256 frameScore0 = bowlingGame.scoreForFrame(0);
+        assertEq(frameScore0, 12);
+        uint256 frameScore1 = bowlingGame.scoreForFrame(1);
+        assertEq(frameScore1, 7);
+        uint256 frameScore2 = bowlingGame.scoreForFrame(2);
+        assertEq(frameScore2, 4);
+    }
 
     //    function test_score_frame_when_previous_spare() public {
 //        bowlingGame.roll(5);

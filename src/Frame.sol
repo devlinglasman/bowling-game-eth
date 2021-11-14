@@ -37,7 +37,7 @@ contract Frame {
         return firstRoll + secondRoll + thirdRoll;
     }
 
-    function wasSpare() public view returns (bool) {
+    function gotSpareOrStrike() public view returns (bool) {
         return firstRoll + secondRoll == 10;
     }
 }

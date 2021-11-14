@@ -38,8 +38,15 @@ contract BowlingGame {
 
     function roll(uint256 pinsKnockedDown) public {
         if (allFrames[currentFrameNumber].firstRoll() == 0) {
+            // if the first roll of current frame does not exist,
+            // set it. And if frame-2 was spare or strike, set third roll.
             allFrames[currentFrameNumber].setFirstRoll(pinsKnockedDown);
+            if (currentFrameNumber > 1 && allFrames[currentFrameNumber - 2].gotSpareOrStrike()) {
+                allFrames[currentFrameNumber - 2].setThirdRoll(pinsKnockedDown);
+            }
         } else if (allFrames[currentFrameNumber].secondRoll() == 0) {
+            // if the second roll of current frame does not exist,
+            // set it. And if frame-2 was strike, set fourth roll.
             allFrames[currentFrameNumber].setSecondRoll(pinsKnockedDown);
         } else {
             allFrames[currentFrameNumber].setThirdRoll(pinsKnockedDown);
