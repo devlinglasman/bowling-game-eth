@@ -1,16 +1,25 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+import "./Frame.sol";
+
 contract BowlingGame {
-    uint256 firstRoll;
-    uint256 secondRoll;
+    // The game can interrogate the previous frame about whether it is waiting due
+    // to a spare or strike, then give the next rolls to it.
+
+    Frame currentFrame = new Frame();
 
     function roll(uint256 pinsKnockedDown) public {
-        firstRoll != 0 ? secondRoll = pinsKnockedDown : firstRoll = pinsKnockedDown;
+        currentFrame.firstRoll() != 0 ? currentFrame.setSecondRoll(pinsKnockedDown) :
+        currentFrame.setFirstRoll(pinsKnockedDown);
     }
 
     function isFrameFinished() public view returns (bool) {
-        require(firstRoll != 0);
-        return firstRoll == 10 || secondRoll != 0 ? true : false;
+        //        require(firstRoll != 0);
+        return currentFrame.isFrameFinished();
     }
+    //
+    //    function scoreForFrame(uint256 frameNumber) public view returns (uint) {
+    //        return firstRoll + secondRoll;
+    //    }
 }
