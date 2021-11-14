@@ -7,25 +7,29 @@ contract BowlingGame {
     // The game can interrogate the previous frame about whether it is waiting due
     // to a spare or strike, then give the next rolls to it.
 
-    Frame[2] allFrames = [new Frame(0), new Frame(1)];
-    Frame currentFrame = allFrames[0];
+    Frame[2] allFrames;
+    uint256 currentFrameNumber;
+
+    constructor() {
+        allFrames = [new Frame(0), new Frame(1)];
+        currentFrameNumber = 0;
+    }
 
     function roll(uint256 pinsKnockedDown) public {
-        if (currentFrame.firstRoll() == 0) {
-            currentFrame.setFirstRoll(pinsKnockedDown);
-        } else if (currentFrame.secondRoll() == 0) {
-            currentFrame.setSecondRoll(pinsKnockedDown);
+        if (allFrames[currentFrameNumber].firstRoll() == 0) {
+            allFrames[currentFrameNumber].setFirstRoll(pinsKnockedDown);
+        } else if (allFrames[currentFrameNumber].secondRoll() == 0) {
+            allFrames[currentFrameNumber].setSecondRoll(pinsKnockedDown);
         } else {
-            currentFrame.setThirdRoll(pinsKnockedDown);
+            allFrames[currentFrameNumber].setThirdRoll(pinsKnockedDown);
+        }
+        if (isFrameFinished(currentFrameNumber)) {
+            currentFrameNumber++;
         }
     }
 
-    function isFrameFinished() public view returns (bool) {
-        return currentFrame.isFrameFinished();
-    }
-
-    function getFrameNumber() public view returns (uint) {
-        return currentFrame.frameNumber();
+    function isFrameFinished(uint256 frameNumber) public view returns (bool) {
+        return allFrames[frameNumber].isFrameFinished();
     }
 
     function scoreForFrame(uint256 frameNumber) public view returns (uint) {
