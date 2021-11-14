@@ -9,6 +9,8 @@ contract Frame {
     uint256 public frameNumber;
     uint256 public firstRoll;
     uint256 public secondRoll;
+    uint256 public thirdRoll;
+    uint256 public fourthRoll;
 
     function setFirstRoll(uint value) public {
         firstRoll = value;
@@ -18,12 +20,20 @@ contract Frame {
         secondRoll = value;
     }
 
+    function setThirdRoll(uint value) public {
+        thirdRoll = value;
+    }
+
     function isFrameFinished() public view returns (bool) {
         require(firstRoll != 0);
         return firstRoll == 10 || secondRoll != 0 ? true : false;
     }
 
     function scoreForFrame() public view returns (uint) {
-        return firstRoll + secondRoll;
+        return firstRoll + secondRoll + thirdRoll;
+    }
+
+    function wasSpare() public view returns (bool) {
+        return firstRoll + secondRoll == 10;
     }
 }

@@ -10,8 +10,13 @@ contract BowlingGame {
     Frame currentFrame = new Frame();
 
     function roll(uint256 pinsKnockedDown) public {
-        currentFrame.firstRoll() != 0 ? currentFrame.setSecondRoll(pinsKnockedDown) :
-        currentFrame.setFirstRoll(pinsKnockedDown);
+        if (currentFrame.firstRoll() == 0) {
+            currentFrame.setFirstRoll(pinsKnockedDown);
+        } else if (currentFrame.secondRoll() == 0) {
+            currentFrame.setSecondRoll(pinsKnockedDown);
+        } else {
+            currentFrame.setThirdRoll(pinsKnockedDown);
+        }
     }
 
     function isFrameFinished() public view returns (bool) {
